@@ -1,0 +1,35 @@
+Vagrant.configure("2") do |config|
+    # skip vbguest
+    #config.vbguest.auto_update = false
+    # Guest VM Name, CentOS version for base box, shared folder
+    vm_name = 'ansible'
+    vagrant_arg = ARGV[0]
+    config.vm.box = "centos/7"
+    config.vm.box_version = "2004.01"
+    config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", :mount_options => ["dmode=777","fmode=777"]
+
+    # Guest VM settings
+    config.vm.provider "virtualbox" do |v|
+        v.customize ["modifyvm", :id, "--memory", 4096]
+        v.customize ["modifyvm", :id, "--cpus", "4"]
+        v.customize ["modifyvm", :id, "--cpuexecutioncap", "100"]
+        v.customize ["modifyvm", :id, "--vram", "20"]
+        v.customize ["modifyvm", :id, "--ioapic", "on"]
+        v.customize ["modifyvm", :id, "--audio", "none"]
+        v.customize ["modifyvm", :id, "--usb", "off"]
+        #v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
+        v.name = vm_name
+    end
+
+    # Set up a private IP that can be added to the host machine's hosts file
+    config.vm.network "private_network", ip: "192.168.99.5"
+
+    config.vm.hostname = vm_name
+
+    config.vm.provision "ansible_local" do |ansible|
+        ansible.playbook = "provisioning/vagrant_playbook.yml"
+        # ansible.verbose = "v"
+    end
+    config.vm.provision :reload 
+    #config.vm.synced_folder ".", "/home/vagrant/hadoop_server", type: 'virtualbox'
+end
