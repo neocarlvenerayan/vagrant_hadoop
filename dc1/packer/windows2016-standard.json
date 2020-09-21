@@ -1,0 +1,67 @@
+{
+    "variables": {
+        "name":     "windows2016-standard",
+        "iso_url": "iso/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO",
+        "iso_checksum": "md5:70721288BBCDFE3239D8F8C0FAE55F1F"
+    },
+    "builders": [
+        {
+            "type":                 "virtualbox-iso",
+            "communicator":         "winrm",
+            "disk_size":            61440,
+            "floppy_files": [
+                "Autounattend.xml",
+                "update-windows.ps1",
+                "enable-winrm.ps1"
+            ],
+            "guest_os_type":        "Windows10_64",
+            "headless":             false,
+            "iso_url":              "{{user `iso_url`}}",
+            "iso_checksum":         "{{user `iso_checksum`}}",
+            "winrm_username":       "vagrant",
+            "winrm_password":       "vagrant",
+            "winrm_timeout":        "6h",
+            "shutdown_command":     "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\"",
+            "guest_additions_mode": "attach",
+            "vm_name": "dc1",
+            "vboxmanage": [
+                ["modifyvm", "{{.Name}}", "--memory", "4096"],
+                ["modifyvm", "{{.Name}}", "--cpus",      "2"],
+                ["modifyvm", "{{.Name}}", "--vram",     "32"]
+            ]
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "windows-restart",
+            "restart_timeout": "6m"
+        },
+        {
+            "type": "powershell",
+            "execute_command": "powershell -ExecutionPolicy Bypass \"& { {{.Vars}}{{.Path}}; exit $LastExitCode}\"",
+            "scripts": [
+                "enable-rdp.ps1",
+                "guest-tools.ps1"
+            ]
+        },
+        {
+            "type": "windows-restart"
+        },
+        {
+            "type": "powershell",
+            "execute_command": "powershell -ExecutionPolicy Bypass \"& { {{.Vars}}{{.Path}}; exit $LastExitCode}\"",
+            "scripts": [
+                "install-pkgs.ps1",
+                "final-tweaks.ps1",
+                "compact.ps1"
+            ]
+        }
+    ],
+    "post-processors": [
+        {
+            "type": "vagrant",
+            "keep_input_artifact": false,
+            "output": "builds/{{user `name`}}.{{.Provider}}.box"
+        }
+    ]
+}

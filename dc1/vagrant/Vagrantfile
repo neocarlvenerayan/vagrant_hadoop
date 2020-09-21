@@ -1,0 +1,30 @@
+Vagrant.configure("2") do |config|
+    vm_name = "dc1"  
+    config.vm.box = "dc1"
+
+    config.vm.boot_timeout = 600
+
+    # Port forward WinRM (Windows Remote Management) and RDP
+    config.vm.network "forwarded_port", guest: 3389, host: 13390, id: "rdp", auto_correct: true
+    config.vm.network :forwarded_port, guest: 5985, host: 15985, id: "winrm", auto_correct: true
+   
+    config.vm.network "private_network", ip: "192.168.99.10"
+   
+    config.vm.communicator = "winrm"
+    config.vm.hostname = vm_name 
+    config.vm.guest = :windows
+   
+    config.vm.provider "VirtualBox" do |vb|
+      # Display the VirtualBox GUI when booting the machine
+      vb.gui = true
+      # Customize the amount of memory on the VM:
+      vb.customize ["modifyvm", :id, "--memory", 3072]
+      vb.customize ["modifyvm", :id, "--cpus", "2"]
+      vb.customize ["modifyvm", :id, "--cpuexecutioncap", "100"]
+      vb.customize ["modifyvm", :id, "--vram", "60"]
+      vb.customize ["modifyvm", :id, "--ioapic", "on"]
+      vb.customize ["modifyvm", :id, "--audio", "none"]
+      vb.customize ["modifyvm", :id, "--usb", "off"]
+      vb.name = vm_name  
+    end
+  end

@@ -22,7 +22,8 @@ Install-WindowsFeature AD-Domain-Services -IncludeManagementTools -Verbose
 
 Import-Module ADDSDeployment
 
-Install-ADDSForest -SkipPreChecks -DomainName "adtest07.org" -InstallDns -SafeModeAdministratorPassword $pwdSecureString -Confirm -Force -Verbose -NoRebootOnCompletion
+Install-ADDSForest -SkipPreChecks -DomainName "adtest07.org" -InstallDns -SafeModeAdministratorPassword $pwdSecureString -Confirm -Force -Verbose 
+#-NoRebootOnCompletion
 
 Import-Module ActiveDirectory
 
