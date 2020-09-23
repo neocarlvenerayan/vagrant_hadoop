@@ -9,7 +9,7 @@ Set-ItemProperty                                                               `
     -name AutoAdminLogon                                                       `
     -value 0
 
-# diable hibernate *************************************************************
+# disble hibernate *************************************************************
 
 Set-ItemProperty                                                               `
     -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Power'                       `
