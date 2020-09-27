@@ -4,6 +4,7 @@ vagrant-vbguest
 
 
 ### ansible particular version
+sudo yum -y remove ansible
 sudo yum -y install python-pip
 sudo pip install 'ansible==2.9.10' 
 
