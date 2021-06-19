@@ -37,3 +37,15 @@ curl -o Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO https://dono
   vagrant plugin uninstall vagrant-vbguest
   vagrant plugin install vagrant-vbguest --plugin-version 0.21  # this will fix the vagrant up not continuing...
   
+# Note:
+  If you will be using ubuntu/centos desktop (instead of windows) and save some resources you don't need ansible vm but you need this .ssh/config,
+  Host *
+   StrictHostKeyChecking no
+   UserKnownHostsFile=/dev/null
+ 
+  Make sure you execute this after saving it, chmod 0400 ~/.ssh/config
+  
+  
+  
+
+  
