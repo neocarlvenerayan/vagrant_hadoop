@@ -8,6 +8,9 @@ sudo yum -y remove ansible
 sudo yum -y install python-pip
 sudo pip install 'ansible==2.9.10' 
 
+# install packer
+https://computingforgeeks.com/how-to-install-and-use-packer/
+
 #winrm for ansible windows
 sudo yum -y install python-pip pip
 sudo pip install pywinrm
