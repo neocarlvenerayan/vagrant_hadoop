@@ -37,7 +37,8 @@ curl -o pbis-open-9.1.0.551.linux.x86_64.rpm.sh https://donotdeletetfstate.blob.
 curl -o Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO https://donotdeletetfstate.blob.core.windows.net/binary/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO
 
 # packer cli for windows
-  packer build -var 'iso_url=./iso/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO' .\windows2016-standard.json
+  packer build -var 'iso_url=./iso/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO' .\windows2016-standard.json  #windows
+  packer build -var 'iso_url=./iso/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO' ./windows2016-standard.json  #linux
 
 # Bug errata:
   vagrant plugin uninstall vagrant-vbguest
