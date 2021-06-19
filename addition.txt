@@ -32,3 +32,8 @@ curl -o jdk-8u112-linux-x64.tar.gz https://donotdeletetfstate.blob.core.windows.
 curl -o pbis-open-9.1.0.551.linux.x86_64.rpm.sh https://donotdeletetfstate.blob.core.windows.net/binary/pbis-open-9.1.0.551.linux.x86_64.rpm.sh
 # windows 2016
 curl -o Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO https://donotdeletetfstate.blob.core.windows.net/binary/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO
+
+# Bug errata:
+  vagrant plugin uninstall vagrant-vbguest
+  vagrant plugin install vagrant-vbguest --plugin-version 0.21  # this will fix the vagrant up not continuing...
+  
