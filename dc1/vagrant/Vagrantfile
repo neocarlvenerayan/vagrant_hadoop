@@ -13,7 +13,7 @@ Vagrant.configure("2") do |config|
     config.vm.communicator = "winrm"
     config.vm.hostname = vm_name 
     config.vm.guest = :windows
-    config.vm.synced_folder "hadoop/", "/hadoop"
+    config.vm.synced_folder "hadoop/", "/hadoop"   # you have to point this whethere you are in windows or linux, now I just recommend linux to run this
    
     config.vm.provider "VirtualBox" do |vb|
       # Display the VirtualBox GUI when booting the machine
