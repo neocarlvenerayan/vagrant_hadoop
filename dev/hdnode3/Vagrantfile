@@ -2,13 +2,13 @@ Vagrant.configure("2") do |config|
     # Guest VM Name, CentOS version for base box, shared folder
     vm_name = 'hdnode3.adtest07.org'
     vagrant_arg = ARGV[0]
-    config.vm.box = "centos/7"
-    config.vm.box_version = "2004.01"
+    config.vm.box = "bento/centos-7.8"
+    config.vm.box_version = "202010.22.0"
 
     # Guest VM settings
     config.vm.provider "virtualbox" do |v|
         v.customize ["modifyvm", :id, "--memory", 4096]
-        v.customize ["modifyvm", :id, "--cpus", "4"]
+        v.customize ["modifyvm", :id, "--cpus", "3"]
         v.customize ["modifyvm", :id, "--cpuexecutioncap", "100"]
         v.customize ["modifyvm", :id, "--vram", "20"]
         v.customize ["modifyvm", :id, "--ioapic", "on"]

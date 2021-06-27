@@ -1,11 +1,12 @@
+# you have to do this first, vagrant box add bento/centos-7 --provider=virtualbox
 Vagrant.configure("2") do |config|
     # skip vbguest
     #config.vbguest.auto_update = false
     # Guest VM Name, CentOS version for base box, shared folder
     vm_name = 'ansible'
     vagrant_arg = ARGV[0]
-    config.vm.box = "centos/7"
-    config.vm.box_version = "2004.01"
+    config.vm.box = "bento/centos-7.8"
+    config.vm.box_version = "202010.22.0"
     config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", :mount_options => ["dmode=777","fmode=777"]
 
     # Guest VM settings
