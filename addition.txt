@@ -8,6 +8,9 @@ sudo yum -y remove ansible
 sudo yum -y install python-pip
 sudo pip install 'ansible==2.9.10' 
 
+# install packer
+https://computingforgeeks.com/how-to-install-and-use-packer/
+
 #winrm for ansible windows
 sudo yum -y install python-pip pip
 sudo pip install pywinrm
@@ -32,3 +35,18 @@ curl -o jdk-8u112-linux-x64.tar.gz https://donotdeletetfstate.blob.core.windows.
 curl -o pbis-open-9.1.0.551.linux.x86_64.rpm.sh https://donotdeletetfstate.blob.core.windows.net/binary/pbis-open-9.1.0.551.linux.x86_64.rpm.sh
 # windows 2016
 curl -o Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO https://donotdeletetfstate.blob.core.windows.net/binary/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO
+
+# packer cli for windows
+  packer build -var 'iso_url=./iso/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO' .\windows2016-standard.json  #windows
+  packer build -var 'iso_url=./iso/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO' ./windows2016-standard.json  #linux
+
+# Bug errata June 6 2021: if vagrant up have error on vbguest,
+  vagrant plugin uninstall vagrant-vbguest
+  vagrant plugin install vagrant-vbguest --plugin-version 0.21  # this will fix the vagrant up not continuing...
+    
+  I remove the windows 2016 on my download, its like 0.75/mo so download your own.
+  
+  
+  
+
+  
